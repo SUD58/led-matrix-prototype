@@ -85,23 +85,16 @@ function LEDCanvas() {
 				lastUpdate = now;
 			}
 
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 			for (const led of leds) {
 				// Interpolate intensity toward target
 				led.intensity += (led.targetIntensity - led.intensity) * 0.1;
 
-				// draw off-state
 				ctx.beginPath();
-				ctx.fillStyle = "#27272a";
+				ctx.fillStyle = `rgba(255,67,6,${led.intensity})`;
 				ctx.roundRect(led.x, led.y, ledWidth, ledHeight, 2);
 				ctx.fill();
-
-				// draw on-state overlay
-				if (led.intensity > 0.01) {
-					ctx.beginPath();
-					ctx.fillStyle = `rgba(255,67,6,${led.intensity})`;
-					ctx.roundRect(led.x, led.y, ledWidth, ledHeight, 2);
-					ctx.fill();
-				}
 			}
 
 			rafId = requestAnimationFrame(render);
