@@ -60,7 +60,6 @@ function LEDCanvas() {
 		window.addEventListener("mouseleave", clearPointer);
 		window.addEventListener("touchmove", updatePointer, { passive: true });
 		window.addEventListener("touchend", clearPointer, { passive: true });
-		window.addEventListener("touchcancel", clearPointer, { passive: true });
 
 		// render loop
 		let rafId;
@@ -79,7 +78,7 @@ function LEDCanvas() {
 					const dist = Math.hypot(dx, dy);
 
 					const noise = noise2D(led.x * 0.01 + time, led.y * 0.01 + time);
-					const adjustedDist = dist - noise * 30;
+					const adjustedDist = dist - noise * 40;
 					led.targetIntensity = Math.max(0, 1 - adjustedDist / radius);
 				}
 				lastUpdate = now;
@@ -108,16 +107,22 @@ function LEDCanvas() {
 			window.removeEventListener("mouseleave", clearPointer);
 			window.removeEventListener("touchmove", updatePointer);
 			window.removeEventListener("touchend", clearPointer);
-			window.removeEventListener("touchcancel", clearPointer);
 		};
 	}, []);
 
-	return <canvas ref={canvasRef} className="fixed inset-0 -z-10 bg-black" />;
+	return <canvas ref={canvasRef} className="fixed top-0 -z-10 bg-black" />;
 }
 
 export default function App() {
 	return (
 		<>
+			<h1 className="h-50 text-white text-8xl">Scroll</h1>
+			<h1 className="h-50 text-white text-8xl">Scroll</h1>
+			<h1 className="h-50 text-white text-8xl">Scroll</h1>
+			<h1 className="h-50 text-white text-8xl">Scroll</h1>
+			<h1 className="h-50 text-white text-8xl">Scroll</h1>
+			<h1 className="h-50 text-white text-8xl">Scroll</h1>
+			<h1 className="h-50 text-white text-8xl">Scroll</h1>
 			<LEDCanvas />
 			{/* your site content */}
 		</>
